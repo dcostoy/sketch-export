@@ -82,6 +82,13 @@ const addLayerString = (layerName, layer, directoryPath) => {
         decoration: getFontDecoration(layer)
       };
       break;
+    default:
+      layerData = {
+        type: layerName,
+        text: layer.text.trim(),
+        decoration: getFontDecoration(layer)
+      };
+      break;
   }
 
   return layerData;

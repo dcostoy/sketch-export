@@ -13,9 +13,11 @@ const getParsedContent = async (
 ) => {
   // process the content of layers
   const contentprocessLayers = layer => {
+
     // process grouped layers but ignore grouped layers named image-*
     if (layer.type === "Group" && !layer.name.match(/^image-/)) {
-      layer.layers.reverse().map(layer => {
+      const layerLayersReversed = [...layer.layers].reverse();
+      layerLayersReversed.map(layer => {
         contentprocessLayers(layer);
       });
     } else {
@@ -30,7 +32,8 @@ const getParsedContent = async (
   // process the layers
   await allLayers.map(layer => {
     if (layer.type === "Artboard" && layer.name === artboardName) {
-      layer.layers.reverse().map(layer => {
+      const layerLayersReversed = [...layer.layers].reverse();
+      layerLayersReversed.map(layer => {
         contentprocessLayers(layer);
       });
     }

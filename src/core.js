@@ -141,6 +141,7 @@ const exportTo = (context, fileType, fileMarkup) => {
       directoryPath,
       fileType
     );
+
     await saveContentToFile(directoryPath, file, content);
     UI.alert(
       "Export complete.",
@@ -151,6 +152,7 @@ const exportTo = (context, fileType, fileMarkup) => {
 
   // save content to file
   const saveContentToFile = (path, file, content) => {
+
     fs.writeFileSync(`${path}${file}`, content, "utf8");
   };
 

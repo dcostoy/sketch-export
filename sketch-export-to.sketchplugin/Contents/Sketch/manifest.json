@@ -6,12 +6,12 @@
     {
       "name": "Artboard -> Markdown",
       "identifier": "to-markdown-identifier",
-      "script": "to-markdown.js"
+      "script": "__to-markdown.js"
     },
     {
       "name": "Artboard -> JSON",
       "identifier": "to-json-identifier",
-      "script": "to-json.js"
+      "script": "__to-json.js"
     }
   ],
   "menu": {
@@ -26,7 +26,7 @@
   "name": "sketch-export-to",
   "identifier": "sketch-export-to",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com/mascardoso/sketch-export/master/.appcast.xml",
-  "author": "Marco Cardoso",
-  "authorEmail": "mascardoso@gmail.com"
+  "appcast": "https://raw.githubusercontent.com/dcostoy/sketch-export/master/.appcast.xml",
+  "author": "Demetrios Costoyiannis",
+  "authorEmail": "demetrios@gmail.com"
 }
