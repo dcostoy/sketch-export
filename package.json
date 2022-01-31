@@ -6,7 +6,7 @@
     "sketch": ">=49.0"
   },
   "skpm": {
-    "name": "sketch-export",
+    "name": "Export Artboard Text",
     "manifest": "src/manifest.json",
     "main": "sketch-export.sketchplugin",
     "assets": [
