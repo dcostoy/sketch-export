@@ -40,11 +40,7 @@ const exportTo = (context, fileType, fileMarkup) => {
         .path()
         .replace(file, ""); // remove file to get only directory
       try {
-        parseContent(pageLayers, artboard, directoryPath, file).then(val => {
-          if (previewOnline) {
-            saveContentPreviewOnline(val);
-          }
-        });
+        parseContent(pageLayers, artboard, directoryPath, file)
       } catch (err) {
         UI.alert("❌", `Something went wrong - ${err}.`);
       }
@@ -66,7 +62,7 @@ const exportTo = (context, fileType, fileMarkup) => {
     exportModal.setIcon(createPluginModalIcon());
 
     // adding the main cta's
-    exportModal.addButtonWithTitle("Ok");
+    exportModal.addButtonWithTitle("OK");
     exportModal.addButtonWithTitle("Cancel");
 
     // Creating the view
@@ -94,31 +90,8 @@ const exportTo = (context, fileType, fileMarkup) => {
       dropdownArtboards.addItemWithTitle(artboard);
     });
 
-    // Create Checkbox for Preview
-    const checkboxPreview = NSButton.alloc().initWithFrame(
-      NSMakeRect(0, 20, viewWidth, 22)
-    );
-
-    // Setting the options for the checkbox
-    checkboxPreview.setButtonType(NSSwitchButton);
-    checkboxPreview.setBezelStyle(0);
-    checkboxPreview.setTitle(`Preview the generated ${fileMarkup} online`);
-
-    // Create a warning images upload label for the checkbox
-    const checkboxPreviewLabel = NSTextField.alloc().initWithFrame(
-      NSMakeRect(18, 0, viewWidth, 22)
-    );
-    checkboxPreviewLabel.setStringValue("(images won't be uploaded / visible)");
-    checkboxPreviewLabel.setFont(NSFont.systemFontOfSize_(10));
-    checkboxPreviewLabel.editable = false;
-    checkboxPreviewLabel.selectable = false;
-    checkboxPreviewLabel.bezeled = false;
-    checkboxPreviewLabel.drawsBackground = false;
-
     view.addSubview(dropdownArtboardLabel);
     view.addSubview(dropdownArtboards);
-    view.addSubview(checkboxPreview);
-    view.addSubview(checkboxPreviewLabel);
 
     const resultExportModal = exportModal.runModal();
     if (resultExportModal != "1000") {
@@ -126,9 +99,7 @@ const exportTo = (context, fileType, fileMarkup) => {
     } else {
       // save selected artboard
       selectedArtboard = artboards[dropdownArtboards.indexOfSelectedItem()];
-      // save option checkbox preview online
-      previewOnline = checkboxPreview.stringValue() == 1;
-      runSaveFileDialog(pageLayers, selectedArtboard, previewOnline);
+      runSaveFileDialog(pageLayers, selectedArtboard, 0);
     }
   };
 
@@ -187,21 +158,7 @@ const exportTo = (context, fileType, fileMarkup) => {
     }
   };
 
-  // save preview of content online
-  const saveContentPreviewOnline = content => {
-    fetch("https://file.io", {
-      method: "POST",
-      body: `text=${content}`
-    })
-      .then(response => response.json())
-      .then(result => runPreviewOnlineModal(result.link, fileMarkup))
-      .catch(error =>
-        UI.alert(
-          "❌",
-          `Something occured while creating the preview - ${error}.`
-        )
-      );
-  };
+
 
   // select at least one artboard
   if (artboards.length === 0) {
