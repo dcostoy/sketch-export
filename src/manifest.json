@@ -1,21 +1,15 @@
 {
-  "compatibleVersion": 3,
-  "bundleVersion": 1,
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
   "icon": "icon.png",
   "commands": [
     {
-      "name": "Artboard -> Markdown",
-      "identifier": "to-markdown-identifier",
-      "script": "./to-markdown.js"
-    },
-    {
-      "name": "Artboard -> JSON",
-      "identifier": "to-json-identifier",
-      "script": "./to-json.js"
+      "name": "my-command",
+      "identifier": "sketch-export.my-command-identifier",
+      "script": "./my-command.js"
     }
   ],
   "menu": {
-    "title": "Export Sketch",
-    "items": ["to-markdown-identifier", "to-json-identifier"]
+    "title": "sketch-export",
+    "items": ["sketch-export.my-command-identifier"]
   }
 }

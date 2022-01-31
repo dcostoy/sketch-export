@@ -32,14 +32,16 @@ const exportTo = (context, fileType, fileMarkup) => {
 
     // launch dialog
     const resultSaveDialog = savePanel.runModal();
-
+    console.error("Result: ", resultSaveDialog)
     // result
     if (resultSaveDialog == NSFileHandlingPanelOKButton) {
+      console.error(savePanel.nameFieldStringValue())
       const file = `${savePanel.nameFieldStringValue()}.${fileType}`;
       const directoryPath = savePanel
         .URL()
         .path()
         .replace(file, ""); // remove file to get only directory
+        console.error(directoryPath, file)
       try {
         parseContent(pageLayers, artboard, directoryPath, file).then(val => {
           if (previewOnline) {

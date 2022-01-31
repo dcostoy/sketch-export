@@ -1,44 +1,92 @@
-![sketch export to](./assets/icon-big.jpg)
-
-# sketch-export-to
-
-![preview](./assets/preview.gif)
-
-## Why
-
-Sketch as the source of truth for UI guidelines (for instance in design systems). The idea behind it was to generate either markdown or json from an artboard, fetch this data and push it to a site.
+# sketch-export
 
 ## Installation
 
-You can clone this repo or [download](https://github.com/mascardoso/sketch-export/releases) the plugin
+- [Download](../../releases/latest/download/sketch-export.sketchplugin.zip) the latest release of the plugin
+- Un-zip
+- Double-click on sketch-export.sketchplugin
 
-_Double-click on **sketch-export-to.sketchplugin**_ to install it in your sketch.
-
-_Tested on Sketch 52+_
-
-## The catch
-
-- As a start take a look at the _examples > ui.sketch file_ and use it as a reference
-- I'm assuming you know [markdown syntax](https://www.markdownguide.org/basic-syntax/)
-- I'm assuming you know what is [json](https://www.w3schools.com/js/js_json_syntax.asp)
-- Keep your layers ordered. This will let the plugin understand which markup renders first.
-  - You can organize visually your artboard the way you want but the layers should follow a reading order from top to bottom.
-- Follow the below naming convention for your layers:
-  - `heading1 | 2 | 3 | 4` - exports different heading sizes / levels
-  - `paragraph` - exports a single paragraph
-  - `paragraph-multi` - exports multiple paragraphs
-  - `blockquote` - exports a blockquote
-  - `horizontal-rule` - exports a horizontal line
-  - `image-*` - exports the image (1:1) as an asset. If you have multiple symbols that are a composition of an image, group them and rename to `image-*`. `-*` should be always `-1 | -2 | ...` so they're exported with that layer name `image-1 | image-2 | ...`
-  - `list-unordered` - exports an unordered list
-  - `list-ordered` - exports an ordered list
-
-## Left to do
-
-- ~~Create export for json~~
-- Add more markdown / json export possibilities
-- Detect font weights on a word or multiple inside of a text layer and parse it to the proper markdown weight.
-
-## skpm
+## Development Guide
 
 _This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
+
+### Usage
+
+Install the dependencies
+
+```bash
+npm install
+```
+
+Once the installation is done, you can run some commands inside the project folder:
+
+```bash
+npm run build
+```
+
+To watch for changes:
+
+```bash
+npm run watch
+```
+
+Additionally, if you wish to run the plugin every time it is built:
+
+```bash
+npm run start
+```
+
+### Custom Configuration
+
+#### Babel
+
+To customize Babel, you have two options:
+
+- You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in your project's root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a "presets" object, it will replace & reset all Babel presets that skpm defaults to.
+
+- If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more info.
+
+#### Webpack
+
+To customize webpack create `webpack.skpm.config.js` file which exports function that will change webpack's config.
+
+```js
+/**
+ * Function that mutates original webpack config.
+ * Supports asynchronous changes when promise is returned.
+ *
+ * @param {object} config - original webpack config.
+ * @param {boolean} isPluginCommand - whether the config is for a plugin command or a resource
+ **/
+module.exports = function(config, isPluginCommand) {
+  /** you can change config here **/
+}
+```
+
+### Debugging
+
+To view the output of your `console.log`, you have a few different options:
+
+- Use the [`sketch-dev-tools`](https://github.com/skpm/sketch-dev-tools)
+- Run `skpm log` in your Terminal, with the optional `-f` argument (`skpm log -f`) which causes `skpm log` to not stop when the end of logs is reached, but rather to wait for additional data to be appended to the input
+
+### Publishing your plugin
+
+```bash
+skpm publish <bump>
+```
+
+(where `bump` can be `patch`, `minor` or `major`)
+
+`skpm publish` will create a new release on your GitHub repository and create an appcast file in order for Sketch users to be notified of the update.
+
+You will need to specify a `repository` in the `package.json`:
+
+```diff
+...
++ "repository" : {
++   "type": "git",
++   "url": "git+https://github.com/ORG/NAME.git"
++  }
+...
+```
