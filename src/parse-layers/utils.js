@@ -10,11 +10,10 @@ const exportJpg = (layer, outputFolder) => {
 };
 
 const getFontName = layer => {
-  return layer.sketchObject.fontPostscriptName;
+  return layer.sketchObject.fontPostscriptName();
 };
 
 const isBold = layer => {
-  console.error("Error", layer.sketchObject);
   return getFontName(layer).match(/(Bold|bold)$/);
 };
 

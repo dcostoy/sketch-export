@@ -1,7 +1,7 @@
 {
-  "name": "sketch-export",
-  "description": "",
-  "version": "0.1.0",
+  "name": "Export Artboard Text",
+  "description": "Export an artboard layers to json or markdown",
+  "version": "2.1.0",
   "engines": {
     "sketch": ">=49.0"
   },
@@ -11,17 +11,28 @@
     "main": "sketch-export.sketchplugin",
     "assets": [
       "assets/**/*"
-    ],
-    "sketch-assets-file": "sketch-assets/icons.sketch"
+    ]
   },
   "scripts": {
-    "build": "skpm-build",
-    "watch": "skpm-build --watch",
-    "start": "skpm-build --watch --run",
+    "build": "skpm-build && skpm-link",
+    "watch": "skpm-build --watch && skpm-link",
+    "start": "skpm-build --watch --run && skpm-link",
     "postinstall": "npm run build && skpm-link"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.8.0"
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/runtime": "^7.1.5",
+    "@skpm/builder": "^0.8.0",
+    "eslint": "^8.8.0"
   },
-  "author": "Demetrios Costoyiannis <d@dcostoy.com>"
+  "author": "Demetrios Costoyiannis <demetrios@gmail.com>",
+  "dependencies": {
+    "@skpm/dialog": "^0.2.4",
+    "@skpm/fs": "github:skpm/fs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcostoy/sketch-export.git"
+  }
 }

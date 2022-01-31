@@ -81,10 +81,10 @@ const addMarkdownSyntax = (layerName, layer, directoryPath) => {
       const simpleParContext = getFontDecorationMd(layer);
       layerMd += `${simpleParContext}${layer.text.trim()}${simpleParContext}\n\n`;
       break;
-    default:
-      const otherTxtContext = getFontDecorationMd(layer);
-      layerMd += `${otherTxtContext}${layer.text.trim()}${otherTxtContext}\n\n`;
-      break;
+    //default:
+    //  const otherTxtContext = getFontDecorationMd(layer);
+    //  layerMd += `${otherTxtContext}${layer.text.trim()}${otherTxtContext}\n\n`;
+    //  break;
   }
   return layerMd;
 };
